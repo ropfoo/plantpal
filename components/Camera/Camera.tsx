@@ -1,7 +1,7 @@
 import { CameraType, Camera, CameraCapturedPicture } from 'expo-camera';
 import { useRef, useState } from 'react';
 import * as FileSystem from 'expo-file-system';
-
+import * as React from 'react';
 import {
   Button,
   ImageBackground,
@@ -11,7 +11,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-export default function CameraComponent() {
+
+interface CameraComponentProps {
+  isActive?: boolean;
+}
+
+export default function CameraComponent({
+  isActive = true,
+}: CameraComponentProps) {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [pictures, setPictures] = useState<CameraCapturedPicture[]>([]);
@@ -52,6 +59,11 @@ export default function CameraComponent() {
     console.log(readResult);
   }
 
+  React.useEffect(() => {
+    console.log('components mounts');
+    // cameraRef.current?.
+  }, []);
+
   return (
     <View
       style={{
@@ -60,15 +72,17 @@ export default function CameraComponent() {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Camera ref={cameraRef} type={type} style={{ width: 300, height: 500 }}>
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <TouchableOpacity
-            style={{ width: 300, height: 100 }}
-            onPress={toggleCameraType}>
-            <Text style={{ color: 'red' }}>Flip Camera</Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
+      {isActive && (
+        <Camera ref={cameraRef} type={type} style={{ width: 300, height: 500 }}>
+          <View style={{ flex: 1, justifyContent: 'center' }}>
+            <TouchableOpacity
+              style={{ width: 300, height: 100 }}
+              onPress={toggleCameraType}>
+              <Text style={{ color: 'red' }}>Flip Camera</Text>
+            </TouchableOpacity>
+          </View>
+        </Camera>
+      )}
       <Button title='test' onPress={takePicture}></Button>
       <Button title='save image' onPress={savePicture}></Button>
       <ScrollView horizontal>
