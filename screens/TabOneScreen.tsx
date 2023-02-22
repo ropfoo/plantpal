@@ -1,22 +1,30 @@
-import { StyleSheet } from 'react-native';
+import * as React from 'react';
+import { Button, ScrollView, StyleSheet } from 'react-native';
+import Camera from '../components/Camera/Camera';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function TabOneScreen({
+  navigation,
+}: RootTabScreenProps<'TabOne'>) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <Camera />
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  camera: {
+    height: 300,
+    width: 300,
+  },
   container: {
-    flex: 1,
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
