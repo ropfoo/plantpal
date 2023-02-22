@@ -1,8 +1,5 @@
 import * as React from 'react';
 import { Button, ScrollView, StyleSheet } from 'react-native';
-import Camera from '../components/Camera/Camera';
-
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
@@ -12,7 +9,10 @@ export default function TabOneScreen({
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Camera />
+        <Button
+          onPress={() => navigation.navigate('AddPlantOne')}
+          title='Add Tree'
+        />
       </View>
     </ScrollView>
   );
