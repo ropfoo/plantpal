@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { Button, ScrollView, StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
+import { colors } from '../constants/Colors';
 import { RootTabScreenProps } from '../types';
 
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
   return (
-    <ScrollView>
+    <ScrollView style={styles.layout}>
       <View style={styles.container}>
         <Button
           onPress={() => navigation.navigate('AddPlantOne')}
@@ -19,6 +20,7 @@ export default function TabOneScreen({
 }
 
 const styles = StyleSheet.create({
+  layout: { backgroundColor: colors.midnight },
   camera: {
     height: 300,
     width: 300,

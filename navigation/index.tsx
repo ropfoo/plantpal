@@ -14,7 +14,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
 
-import Colors from '../constants/Colors';
+import Colors, { colors } from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import AddPlantOne from '../screens/AddPlant/AddPlantOne';
 import AddPlantTwo from '../screens/AddPlant/AddPlantTwo';
@@ -51,7 +51,11 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: colors.midnight },
+        headerShadowVisible: false,
+      }}>
       <Stack.Screen
         name='Root'
         component={BottomTabNavigator}
@@ -95,6 +99,8 @@ function BottomTabNavigator() {
       initialRouteName='TabOne'
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
+        headerStyle: { backgroundColor: colors.midnight },
+        headerShadowVisible: false,
       }}>
       <BottomTab.Screen
         name='TabOne'
