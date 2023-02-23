@@ -22,6 +22,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   AddPlantOne: undefined;
   AddPlantTwo: undefined;
+  AddPlantThree: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

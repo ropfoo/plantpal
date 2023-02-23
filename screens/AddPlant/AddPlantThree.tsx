@@ -5,12 +5,8 @@ import { View, Text } from '../../components/Themed';
 import { RootStackScreenProps, RootTabScreenProps } from '../../types';
 import CameraComponent from '../../components/Camera/Camera';
 
-export default function AddPlantTwo({
+export default function AddPlantThree({
   navigation,
-}: RootStackScreenProps<'AddPlantTwo'>) {
-  return (
-    <View style={{ flex: 1 }}>
-      <CameraComponent />
-    </View>
-  );
+}: RootStackScreenProps<'AddPlantThree'>) {
+  return <View style={{ flex: 1 }}></View>;
 }
