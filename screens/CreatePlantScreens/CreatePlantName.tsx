@@ -14,25 +14,34 @@ export default function CreatePlantName({
   return (
     <MainLayout>
       <KeyboardAvoidingView behavior='padding'>
-        <Text>Type in a name</Text>
+        <Text style={{ fontWeight: 'bold', fontSize: 20, textAlign: 'center' }}>
+          Type in a name
+        </Text>
+        <View style={{ paddingTop: 38 }} />
 
         <TextInput
           value={plantName}
+          //   autoFocus
+          autoCorrect={false}
+          spellCheck={false}
           onChangeText={(input) => setPlantName(input)}
           placeholder='blaba'
           placeholderTextColor={colors.darkcyan}
           style={{
             backgroundColor: colors.lightcyan,
             fontSize: 16,
-            paddingVertical: 12,
-            paddingHorizontal: 14,
+            paddingVertical: 21,
+            paddingHorizontal: 16,
             borderRadius: 12,
             fontWeight: 'bold',
           }}
         />
-        <View style={{ paddingTop: 20 }} />
+        <View style={{ paddingTop: 85 }} />
         <Button
-          onPress={() => navigation.navigate('CreatePlantImage', { plantName })}
+          isDisabled={!plantName}
+          onPress={() =>
+            navigation.navigate('CreatePlantImage', { name: plantName })
+          }
           title='Next'
         />
       </KeyboardAvoidingView>

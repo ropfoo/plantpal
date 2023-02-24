@@ -55,7 +55,12 @@ export default function CameraComponent({
         <Camera
           ref={cameraRef}
           type={type}
-          style={{ width: '100%', height: 333, borderRadius: 32 }}>
+          style={{
+            width: '100%',
+            height: 333,
+            borderRadius: 32,
+            overflow: 'hidden',
+          }}>
           <View style={{ flex: 1, justifyContent: 'center' }}>
             {/* <TouchableOpacity
               style={{ width: 300, height: 100 }}
