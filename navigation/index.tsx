@@ -50,10 +50,11 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+  const colorScheme = useColorScheme();
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: colors.midnight },
+        headerStyle: { backgroundColor: Colors[colorScheme].background },
         headerShadowVisible: false,
       }}>
       <Stack.Screen
@@ -99,7 +100,7 @@ function BottomTabNavigator() {
       initialRouteName='TabOne'
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
-        headerStyle: { backgroundColor: colors.midnight },
+        headerStyle: { backgroundColor: Colors[colorScheme].background },
         headerShadowVisible: false,
       }}>
       <BottomTab.Screen

@@ -1,10 +1,6 @@
 import * as React from 'react';
-import {
-  Button,
-  KeyboardAvoidingView,
-  TextInput,
-  TouchableHighlight,
-} from 'react-native';
+import { KeyboardAvoidingView, TextInput } from 'react-native';
+import Button from '../../components/Buttons/Button';
 import MainLayout from '../../components/Layout/MainLayout';
 
 import { View, Text } from '../../components/Themed';
@@ -34,17 +30,11 @@ export default function AddPlantOne({
             fontWeight: 'bold',
           }}
         />
-        <TouchableHighlight
-          style={{
-            backgroundColor: colors.blue,
-            paddingVertical: 21,
-            borderRadius: 14,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          onPress={() => navigation.navigate('AddPlantTwo')}>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Next</Text>
-        </TouchableHighlight>
+        <View style={{ paddingTop: 20 }} />
+        <Button
+          onPress={() => navigation.navigate('AddPlantTwo')}
+          title='Next'
+        />
       </KeyboardAvoidingView>
     </MainLayout>
   );

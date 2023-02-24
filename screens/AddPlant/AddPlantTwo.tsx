@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { Button, Dimensions, ScrollView, StyleSheet } from 'react-native';
 
-import { View, Text } from '../../components/Themed';
-import { RootStackScreenProps, RootTabScreenProps } from '../../types';
+import { RootStackScreenProps } from '../../types';
 import CameraComponent from '../../components/Camera/Camera';
+import MainLayout from '../../components/Layout/MainLayout';
 
 export default function AddPlantTwo({
   navigation,
 }: RootStackScreenProps<'AddPlantTwo'>) {
   return (
-    <View style={{ flex: 1 }}>
+    <MainLayout>
       <CameraComponent />
-    </View>
+    </MainLayout>
   );
 }

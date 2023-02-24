@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { Button, ScrollView, StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
-import { colors } from '../constants/Colors';
+import Colors, { colors } from '../constants/Colors';
+import useColorScheme from '../hooks/useColorScheme';
 import { RootTabScreenProps } from '../types';
 
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
+  const colorScheme = useColorScheme();
   return (
-    <ScrollView style={styles.layout}>
+    <ScrollView style={{ backgroundColor: Colors[colorScheme].background }}>
       <View style={styles.container}>
         <Button
           onPress={() => navigation.navigate('AddPlantOne')}
