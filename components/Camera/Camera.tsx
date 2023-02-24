@@ -6,11 +6,10 @@ import {
   Button,
   ImageBackground,
   ScrollView,
-  StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import { colors } from '../../constants/Colors';
 
 interface CameraComponentProps {
   isActive?: boolean;
@@ -73,17 +72,31 @@ export default function CameraComponent({
         alignItems: 'center',
       }}>
       {isActive && (
-        <Camera ref={cameraRef} type={type} style={{ width: 300, height: 500 }}>
+        <Camera
+          ref={cameraRef}
+          type={type}
+          style={{ width: '100%', height: 333, borderRadius: 32 }}>
           <View style={{ flex: 1, justifyContent: 'center' }}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={{ width: 300, height: 100 }}
               onPress={toggleCameraType}>
               <Text style={{ color: 'red' }}>Flip Camera</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </Camera>
       )}
-      <Button title='test' onPress={takePicture}></Button>
+      <View style={{ paddingTop: 21 }} />
+      <TouchableOpacity
+        onPress={takePicture}
+        style={{
+          width: 83,
+          height: 83,
+          backgroundColor: colors.red,
+          borderRadius: 5000,
+          borderWidth: 6,
+          borderColor: colors.lightcyan,
+        }}
+      />
       <Button title='save image' onPress={savePicture}></Button>
       <ScrollView horizontal>
         <View style={{ display: 'flex', flexDirection: 'row' }}>
