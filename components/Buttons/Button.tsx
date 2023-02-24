@@ -1,21 +1,29 @@
 import { TouchableHighlight, Text, FlexAlignType } from 'react-native';
-import { colors } from '../../constants/Colors';
+import Colors, { colors } from '../../constants/Colors';
+import useColorScheme from '../../hooks/useColorScheme';
 
 interface ButtonProps {
   onPress: () => void;
   title: string;
   alignSlef?: FlexAlignType;
+  isDisabled?: boolean;
 }
 
 export default function Button({
   onPress,
   title,
   alignSlef = 'center',
+  isDisabled = false,
 }: ButtonProps) {
+  const colorScheme = useColorScheme();
   return (
     <TouchableHighlight
+      disabled={isDisabled}
+      underlayColor={colors.lightblue}
       style={{
-        backgroundColor: colors.blue,
+        backgroundColor: isDisabled
+          ? Colors[colorScheme].disabled
+          : colors.blue,
         paddingVertical: 21,
         borderRadius: 14,
         justifyContent: 'center',
