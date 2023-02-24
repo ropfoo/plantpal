@@ -20,9 +20,9 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
-  AddPlantOne: undefined;
-  AddPlantTwo: undefined;
-  AddPlantThree: undefined;
+  CreatePlantName: undefined;
+  CreatePlantImage: { plantName: string };
+  CreatePlantSpecies: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

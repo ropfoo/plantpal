@@ -5,20 +5,20 @@ import MainLayout from '../../components/Layout/MainLayout';
 
 import { View, Text } from '../../components/Themed';
 import { colors } from '../../constants/Colors';
-import { RootStackScreenProps, RootTabScreenProps } from '../../types';
+import { RootStackScreenProps } from '../../types';
 
-export default function AddPlantOne({
+export default function CreatePlantName({
   navigation,
-}: RootStackScreenProps<'AddPlantOne'>) {
-  const [treeName, setTreeName] = React.useState('');
+}: RootStackScreenProps<'CreatePlantName'>) {
+  const [plantName, setPlantName] = React.useState('');
   return (
     <MainLayout>
       <KeyboardAvoidingView behavior='padding'>
         <Text>Type in a name</Text>
 
         <TextInput
-          value={treeName}
-          onChangeText={(input) => setTreeName(input)}
+          value={plantName}
+          onChangeText={(input) => setPlantName(input)}
           placeholder='blaba'
           placeholderTextColor={colors.darkcyan}
           style={{
@@ -32,7 +32,7 @@ export default function AddPlantOne({
         />
         <View style={{ paddingTop: 20 }} />
         <Button
-          onPress={() => navigation.navigate('AddPlantTwo')}
+          onPress={() => navigation.navigate('CreatePlantImage', { plantName })}
           title='Next'
         />
       </KeyboardAvoidingView>

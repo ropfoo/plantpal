@@ -16,8 +16,6 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors, { colors } from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import AddPlantOne from '../screens/AddPlant/AddPlantOne';
-import AddPlantTwo from '../screens/AddPlant/AddPlantTwo';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
@@ -28,6 +26,8 @@ import {
   RootTabScreenProps,
 } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import CreatePlantName from '../screens/CreatePlantScreens/CreatePlantName';
+import CreatePlantImage from '../screens/CreatePlantScreens/CreatePlantImage';
 
 export default function Navigation({
   colorScheme,
@@ -69,14 +69,14 @@ function RootNavigator() {
       />
       <Stack.Group>
         <Stack.Screen
-          name='AddPlantOne'
-          component={AddPlantOne}
-          options={{ title: 'Oops!' }}
+          name='CreatePlantName'
+          component={CreatePlantName}
+          options={{ title: 'Name' }}
         />
         <Stack.Screen
-          name='AddPlantTwo'
-          component={AddPlantTwo}
-          options={{ title: 'Oops!' }}
+          name='CreatePlantImage'
+          component={CreatePlantImage}
+          options={{ title: 'Photo' }}
         />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>

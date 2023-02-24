@@ -1,6 +1,5 @@
 import { CameraType, Camera, CameraCapturedPicture } from 'expo-camera';
 import { useRef, useState } from 'react';
-import * as FileSystem from 'expo-file-system';
 import * as React from 'react';
 import {
   Button,
@@ -13,14 +12,16 @@ import { colors } from '../../constants/Colors';
 
 interface CameraComponentProps {
   isActive?: boolean;
+  onCapture?: (picture: CameraCapturedPicture) => void;
 }
 
 export default function CameraComponent({
   isActive = true,
+  onCapture,
 }: CameraComponentProps) {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
-  const [pictures, setPictures] = useState<CameraCapturedPicture[]>([]);
+  const [picture, setPicture] = useState<CameraCapturedPicture>();
   // if (!permission) ...
 
   // if (!permission.granted) ...
@@ -37,31 +38,10 @@ export default function CameraComponent({
     await requestPermission();
     const pic = await cameraRef.current?.takePictureAsync();
     if (pic) {
-      setPictures((pics) => (pics?.length ? [pic, ...pics] : [pic]));
+      setPicture(pic);
+      if (onCapture) onCapture(pic);
     }
   }
-
-  async function savePicture() {
-    const samplePicUri = pictures[0]?.uri ?? '';
-    // const fileName = pictures[0].uri.;
-    // console.log(fileName);
-    // console.log(FileSystem.documentDirectory);
-
-    const copyPic = await FileSystem.copyAsync({
-      from: samplePicUri,
-      to: `${FileSystem.documentDirectory}/test.jpg`,
-    });
-
-    const readResult = await FileSystem.readDirectoryAsync(
-      `${FileSystem.documentDirectory}`
-    );
-    console.log(readResult);
-  }
-
-  React.useEffect(() => {
-    console.log('components mounts');
-    // cameraRef.current?.
-  }, []);
 
   return (
     <View
@@ -97,24 +77,6 @@ export default function CameraComponent({
           borderColor: colors.lightcyan,
         }}
       />
-      <Button title='save image' onPress={savePicture}></Button>
-      <ScrollView horizontal>
-        <View style={{ display: 'flex', flexDirection: 'row' }}>
-          {pictures?.map((picture) => (
-            <ImageBackground
-              key={picture.uri}
-              source={{ uri: picture && picture.uri }}
-              borderRadius={10}
-              style={{
-                width: 100,
-                height: 150,
-                marginRight: 20,
-                borderRadius: 5000,
-              }}
-            />
-          ))}
-        </View>
-      </ScrollView>
     </View>
   );
 }
