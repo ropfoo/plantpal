@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Button, ScrollView, StyleSheet } from 'react-native';
+import PlantPreview from '../components/PlantPreview';
 import { Text, View } from '../components/Themed';
 import Colors, { colors } from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -20,12 +21,22 @@ export default function TabOneScreen({
           onPress={() => navigation.navigate('CreatePlantName')}
           title='Add Plant'
         />
-
-        {plantsQuery.data?.map((plant) => (
-          <View key={plant.id}>
-            <Text style={{ color: 'red' }}>{plant.name}</Text>
-          </View>
-        ))}
+        <View
+          style={{
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: 'space-between',
+            paddingHorizontal: 21,
+            flexWrap: 'wrap',
+          }}>
+          {plantsQuery.data?.map((plant) => (
+            <PlantPreview
+              key={plant.id}
+              plant={plant}
+              toPlant={() => navigation.navigate('Plant', { id: plant.id })}
+            />
+          ))}
+        </View>
       </View>
     </ScrollView>
   );

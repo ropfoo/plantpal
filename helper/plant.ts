@@ -35,6 +35,20 @@ export async function getPlants() {
   }
 }
 
+export async function getPlant(id: string) {
+  try {
+    const plantsJSON = await AsyncStorage.getItem('plants');
+    if (plantsJSON) {
+      const plants = JSON.parse(plantsJSON) as Plant[] | null;
+      return plants?.find((plant) => plant.id === id);
+    }
+    return null;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+}
+
 export async function deleteAllPlants() {
   try {
     await AsyncStorage.removeItem('plants');

@@ -28,6 +28,8 @@ import {
 import LinkingConfiguration from './LinkingConfiguration';
 import CreatePlantName from '../screens/CreatePlantScreens/CreatePlantName';
 import CreatePlantImage from '../screens/CreatePlantScreens/CreatePlantImage';
+import CreatePlantSpecies from '../screens/CreatePlantScreens/CreatePlantSpecies';
+import PlantScreen from '../screens/PlantScreen';
 
 export default function Navigation({
   colorScheme,
@@ -55,6 +57,7 @@ function RootNavigator() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: Colors[colorScheme].background },
+
         headerShadowVisible: false,
       }}>
       <Stack.Screen
@@ -67,16 +70,26 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: 'Oops!' }}
       />
+      <Stack.Screen
+        name='Plant'
+        component={PlantScreen}
+        options={{ title: '' }}
+      />
       <Stack.Group>
         <Stack.Screen
           name='CreatePlantName'
           component={CreatePlantName}
-          options={{ title: 'Name' }}
+          options={{ title: '' }}
         />
         <Stack.Screen
           name='CreatePlantImage'
           component={CreatePlantImage}
-          options={{ title: 'Photo' }}
+          options={{ title: '' }}
+        />
+        <Stack.Screen
+          name='CreatePlantSpecies'
+          component={CreatePlantSpecies}
+          options={{ title: '' }}
         />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>

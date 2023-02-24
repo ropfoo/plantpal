@@ -4,12 +4,14 @@ import { Plant } from '../helper/types';
 
 export function usePlants() {
   const queryClient = useQueryClient();
+
   const deleteAllPlantsMutation = useMutation(deleteAllPlants, {
     mutationKey: ['plants'],
     onMutate: () => {
       queryClient.setQueriesData<Plant[]>(['plants'], () => []);
     },
   });
+
   const createPlantMutation = useMutation(createPlant, {
     mutationKey: ['plants'],
     onMutate: (data) => {
@@ -19,6 +21,7 @@ export function usePlants() {
       ]);
     },
   });
+
   const plantsQuery = useQuery(['plants'], getPlants);
 
   return { plantsQuery, createPlantMutation, deleteAllPlantsMutation };
