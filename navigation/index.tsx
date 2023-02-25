@@ -56,8 +56,8 @@ function RootNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: Colors[colorScheme].background },
-
+        headerTransparent: true,
+        headerShown: true,
         headerShadowVisible: false,
       }}>
       <Stack.Screen
@@ -120,7 +120,7 @@ function BottomTabNavigator() {
         name='TabOne'
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
+          title: 'Plants',
           tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
           headerRight: () => (
             <Pressable
