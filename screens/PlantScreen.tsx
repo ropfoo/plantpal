@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import * as React from 'react';
-import { Button, ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
+import PlantImageMain from '../components/Plant/PlantImageMain';
 import { Text, View } from '../components/Themed';
 import Colors, { colors } from '../constants/Colors';
 import { getPlant } from '../helper/plant';
 import useColorScheme from '../hooks/useColorScheme';
 import { RootStackScreenProps } from '../types';
-import { Image } from 'react-native';
 
 export default function PlantScreen({
   navigation,
@@ -19,39 +19,45 @@ export default function PlantScreen({
 
   return (
     <ScrollView style={{ backgroundColor: Colors[colorScheme].background }}>
-      <View style={{ alignItems: 'flex-end' }}>
+      <PlantImageMain plantUri={plant?.imgSrc} />
+      <View style={{ marginTop: 30 }} />
+      <View style={styles.titleSection}>
+        <Text style={styles.subtitle}>{plant?.species}</Text>
+        <Text style={styles.title}>{plant?.name}</Text>
+      </View>
+      <View style={{ marginTop: 30 }} />
+
+      <View style={{ paddingLeft: 31 }}>
         <View
           style={{
-            borderBottomStartRadius: 82,
-            borderTopStartRadius: 16,
-            overflow: 'hidden',
-            position: 'relative',
-            width: 300,
-            height: 250,
+            backgroundColor: Colors[colorScheme].backgroundSecondary,
+            paddingLeft: 38,
+            paddingTop: 38,
+            paddingBottom: 38,
+            paddingRight: 16,
+            borderTopStartRadius: 32,
+            borderBottomStartRadius: 32,
           }}>
-          <Image
-            source={{ uri: plant?.imgSrc }}
-            style={{
-              width: 250,
-              height: 250,
-              position: 'absolute',
-              zIndex: 10,
-              right: 0,
-            }}
-          />
-          <View
-            style={{
-              width: 250,
-              height: 260,
-              right: 0,
-              backgroundColor: colors.lightcyan,
-              position: 'absolute',
-              zIndex: 5,
-            }}
-          />
+          <Text>This is some text</Text>
         </View>
       </View>
-      <Text>{plant?.name}</Text>
     </ScrollView>
   );
 }
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: colors.white,
+  },
+  subtitle: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: colors.cyan,
+    marginBottom: 7,
+  },
+  titleSection: {
+    paddingHorizontal: 31,
+    backgroundColor: 'transparent',
+  },
+});
