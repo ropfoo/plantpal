@@ -11,14 +11,19 @@ export default function PlantPreview({ plant, toPlant }: PlantPreviewProps) {
     <TouchableOpacity
       onPress={toPlant}
       style={{
-        backgroundColor: 'green',
-        width: 160,
-        borderRadius: 26,
-        overflow: 'hidden',
-        marginBottom: 21,
+        marginBottom: 31,
+        alignItems: 'center',
       }}>
-      <Image source={{ uri: plant.imgSrc }} style={{ height: 180 }} />
-      <Text>{plant.name}</Text>
+      <View
+        style={{
+          width: 160,
+          borderRadius: 26,
+          overflow: 'hidden',
+          marginBottom: 8,
+        }}>
+        <Image source={{ uri: plant.imgSrc }} style={{ height: 180 }} />
+      </View>
+      <Text style={{ fontWeight: 'bold' }}>{plant.name}</Text>
     </TouchableOpacity>
   );
 }
