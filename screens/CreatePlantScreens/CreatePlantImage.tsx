@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text } from '../../components/Themed';
-
+import { Image } from 'react-native';
 import { RootStackScreenProps } from '../../types';
 import CameraComponent from '../../components/Camera/Camera';
 import MainLayout from '../../components/Layout/MainLayout';
@@ -27,7 +27,28 @@ export default function CreatePlantImage({
   return (
     <MainLayout>
       <Text>{route.params?.name}</Text>
-      <CameraComponent onCapture={setPicture} />
+      {picture ? (
+        <Image
+          style={{
+            width: '100%',
+            height: 333,
+            borderRadius: 32,
+            overflow: 'hidden',
+          }}
+          source={picture}
+        />
+      ) : (
+        <CameraComponent onCapture={setPicture} />
+      )}
+
+      {picture && (
+        <Button
+          title='retake'
+          onPress={() => {
+            setPicture(undefined);
+          }}
+        />
+      )}
       <Button
         isDisabled={!picture}
         title='Next'
