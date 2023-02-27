@@ -10,6 +10,7 @@ export default function TabTwoScreen() {
     const readResult = await FileSystem.readDirectoryAsync(
       `${FileSystem.documentDirectory}`
     );
+    console.log(readResult);
 
     // const file = await FileSystem.getContentUriAsync(readResult[0]);
     setPicUri(`${FileSystem.documentDirectory}/${readResult[0]}`);

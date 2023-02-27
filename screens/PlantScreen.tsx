@@ -19,7 +19,7 @@ export default function PlantScreen({
 
   return (
     <ScrollView style={{ backgroundColor: Colors[colorScheme].background }}>
-      <PlantImageMain plantUri={plant?.imgSrc} />
+      <PlantImageMain plantName={plant?.name} />
       <View style={{ marginTop: 30 }} />
       <View style={styles.titleSection}>
         <Text style={styles.subtitle}>{plant?.species}</Text>

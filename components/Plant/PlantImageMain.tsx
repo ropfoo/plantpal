@@ -1,13 +1,15 @@
 import { Image } from 'react-native';
+import * as FileSystem from 'expo-file-system';
 import { colors } from '../../constants/Colors';
 import GhostBlue from '../Avatars/GhostBlue';
 import { View } from '../Themed';
 
 interface PlantImageMainProps {
   plantUri?: string;
+  plantName?: string;
 }
 
-export default function PlantImageMain({ plantUri }: PlantImageMainProps) {
+export default function PlantImageMain({ plantName }: PlantImageMainProps) {
   const imageHeight = 260;
   const imageWidth = 250;
   return (
@@ -34,7 +36,9 @@ export default function PlantImageMain({ plantUri }: PlantImageMainProps) {
             zIndex: 10,
           }}>
           <Image
-            source={{ uri: plantUri }}
+            source={{
+              uri: `${FileSystem.documentDirectory}/${plantName}-main.jpg`,
+            }}
             style={{
               width: imageWidth,
               height: imageHeight,
