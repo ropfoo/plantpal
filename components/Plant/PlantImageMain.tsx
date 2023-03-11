@@ -35,15 +35,17 @@ export default function PlantImageMain({ plantName }: PlantImageMainProps) {
             right: 0,
             zIndex: 10,
           }}>
-          <Image
-            source={{
-              uri: `${FileSystem.documentDirectory}/${plantName}-main.jpg`,
-            }}
-            style={{
-              width: imageWidth,
-              height: imageHeight,
-            }}
-          />
+          {plantName && (
+            <Image
+              source={{
+                uri: `${FileSystem.documentDirectory}/${plantName}-main.jpg`,
+              }}
+              style={{
+                width: imageWidth,
+                height: imageHeight,
+              }}
+            />
+          )}
         </View>
         <View
           style={{
