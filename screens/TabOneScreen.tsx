@@ -11,7 +11,7 @@ export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
   const colorScheme = useColorScheme();
-  const { plantsQuery } = usePlants();
+  const { plantsQuery, deleteAllPlantsMutation } = usePlants();
 
   console.log(plantsQuery.data);
   return (
@@ -20,6 +20,10 @@ export default function TabOneScreen({
         <Button
           onPress={() => navigation.navigate('CreatePlantName')}
           title='Add Plant'
+        />
+        <Button
+          onPress={() => deleteAllPlantsMutation.mutate()}
+          title='delete Plants'
         />
         <View
           style={{
