@@ -22,7 +22,7 @@ export default function CreatePlantSpecies({
             imgSrc: route.params?.imgSrc ?? '',
             name: route.params?.name ?? '',
             species: 'Super Plant',
-            wateringHistory: [],
+            activity: [],
             wateringInterval: 7,
           });
           navigation.navigate('Root');

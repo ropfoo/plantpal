@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Plant, WaterPlantData } from './types';
+import { Plant, PlantCheck, WaterPlantData } from './types';
 
 export async function createPlant(newPlant: Plant) {
   try {
@@ -56,8 +56,11 @@ export async function getPlant(id: string) {
     const plantsJSON = await AsyncStorage.getItem('plants');
     if (plantsJSON) {
       const plants = JSON.parse(plantsJSON) as Plant[] | null;
-      return plants?.find((plant) => plant.id === id);
+      const plant = plants?.find((plant) => plant.id === id);
+      console.log('get plant:', plantsJSON);
+      return plant;
     }
+
     return null;
   } catch (e) {
     console.log(e);
@@ -73,14 +76,14 @@ export async function deleteAllPlants() {
   }
 }
 
-export async function waterPlant(id: string, { date }: WaterPlantData) {
+export async function checkPlant(id: string, plantCheck: PlantCheck) {
   try {
     const plant = await getPlant(id);
     if (plant) {
       const updatedPlant: Plant = {
         ...plant,
-        lastWatering: date,
-        wateringHistory: [date, ...(plant.wateringHistory ?? [])],
+        lastWatering: plantCheck.date,
+        activity: [plantCheck, ...(plant.activity ?? [])],
       };
       console.log(updatedPlant);
       const updatedPlants = await updatePlant(updatedPlant);

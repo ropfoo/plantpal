@@ -3,8 +3,8 @@ export type Plant = {
   name: string;
   species: string;
   imgSrc: string;
-  lastWatering?: Date;
-  wateringHistory: Date[];
+  lastWatering?: string;
+  activity: PlantCheck[];
   wateringInterval: number;
 };
 
@@ -16,4 +16,11 @@ export type NewPlant = {
 
 export type WaterPlantData = {
   date: Date;
+};
+
+export type PlantCheck = {
+  plantId: string;
+  date: string;
+  note?: string;
+  wasWatered: boolean;
 };

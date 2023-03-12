@@ -1,14 +1,13 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import ActivityList from '../components/ActivityList/ActivityList';
 import Button from '../components/Buttons/Button';
 import PlantImageMain from '../components/Plant/PlantImageMain';
 import { Text, View } from '../components/Themed';
-import WaterModal from '../components/Water/WaterModal';
+import CheckPlantModal from '../components/Water/CheckPlantModal';
 import Colors, { colors } from '../constants/Colors';
-import { getPlant, waterPlant } from '../helper/plant';
-import { WaterPlantData } from '../helper/types';
 import useColorScheme from '../hooks/useColorScheme';
+import { usePlant } from '../hooks/usePlant';
 import { RootStackScreenProps } from '../types';
 
 export default function PlantScreen({
@@ -16,15 +15,16 @@ export default function PlantScreen({
   route,
 }: RootStackScreenProps<'Plant'>) {
   const colorScheme = useColorScheme();
-  const { data: plant } = useQuery([route.params.id], () =>
-    getPlant(route.params.id)
-  );
+  const { plant, plantCheckMutation } = usePlant(route.params.id);
 
   const [isWaterModalOpen, setIsWaterModalOpen] = React.useState(false);
 
-  const waterPlantMutation = useMutation([plant?.id], () =>
-    waterPlant(plant?.id ?? '', { date: new Date() })
-  );
+  if (!plant)
+    return (
+      <View>
+        <Text>Plant not found</Text>
+      </View>
+    );
 
   return (
     <ScrollView style={{ backgroundColor: Colors[colorScheme].background }}>
@@ -35,10 +35,17 @@ export default function PlantScreen({
         <Text style={styles.title}>{plant?.name}</Text>
       </View>
       <View style={{ marginTop: 30 }} />
-      <WaterModal
+
+      <CheckPlantModal
         isOpen={isWaterModalOpen}
         close={() => setIsWaterModalOpen(false)}
-        onWater={() => waterPlantMutation.mutate()}
+        onComplete={(wasWatered: boolean) =>
+          plantCheckMutation.mutate({
+            plantId: plant.id,
+            date: new Date().toISOString(),
+            wasWatered,
+          })
+        }
       />
       <Button title='water' onPress={() => setIsWaterModalOpen(true)} />
 
@@ -53,7 +60,8 @@ export default function PlantScreen({
             borderTopStartRadius: 32,
             borderBottomStartRadius: 32,
           }}>
-          <Text>This is some text</Text>
+          <Text style={{ fontSize: 20 }}>Activity</Text>
+          <ActivityList activity={plant.activity} />
         </View>
       </View>
     </ScrollView>

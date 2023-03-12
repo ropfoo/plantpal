@@ -4,17 +4,19 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from '../Buttons/Button';
 import { View, Text } from '../Themed';
 
-interface WaterModalProps {
+interface CheckPlantModalProps {
   close: () => void;
   isOpen: boolean;
-  onWater: () => void;
+  onComplete: (wasWatered: boolean) => void;
 }
 
-export default function WaterModal({
+export default function CheckPlantModal({
   close,
   isOpen,
-  onWater,
-}: WaterModalProps) {
+  onComplete,
+}: CheckPlantModalProps) {
+  const [wasWatered, setWasWatered] = React.useState(false);
+
   return (
     <SafeAreaView edges={['top', 'bottom']}>
       <Modal
@@ -30,7 +32,8 @@ export default function WaterModal({
           }}>
           <View style={{ height: '70%' }}>
             <Text>Hello this is a Modal</Text>
-            <Button title='water' onPress={onWater} />
+            <Button title='water' onPress={() => onComplete(true)} />
+            <Button title='just check' onPress={() => onComplete(false)} />
             <Button title='close' onPress={close} />
           </View>
         </View>
