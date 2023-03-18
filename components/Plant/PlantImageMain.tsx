@@ -10,8 +10,8 @@ interface PlantImageMainProps {
 }
 
 export default function PlantImageMain({ plantName }: PlantImageMainProps) {
-  const imageHeight = 260;
-  const imageWidth = 250;
+  const imageHeight = 240;
+  const imageWidth = 220;
   return (
     <View style={{ alignItems: 'flex-end', position: 'relative' }}>
       <View

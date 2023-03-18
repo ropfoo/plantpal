@@ -21,7 +21,7 @@ export default function CheckPlantModal({
     <SafeAreaView edges={['top', 'bottom']}>
       <Modal
         visible={isOpen}
-        animationType='fade'
+        animationType='slide'
         presentationStyle='overFullScreen'
         transparent>
         <View
