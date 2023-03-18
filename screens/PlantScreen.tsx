@@ -39,13 +39,15 @@ export default function PlantScreen({
       <CheckPlantModal
         isOpen={isWaterModalOpen}
         close={() => setIsWaterModalOpen(false)}
-        onComplete={(wasWatered: boolean) =>
+        onComplete={(wasWatered: boolean) => {
           plantCheckMutation.mutate({
             plantId: plant.id,
             date: new Date().toISOString(),
             wasWatered,
-          })
-        }
+          });
+
+          setIsWaterModalOpen(false);
+        }}
       />
       <Button title='water' onPress={() => setIsWaterModalOpen(true)} />
 
@@ -60,7 +62,8 @@ export default function PlantScreen({
             borderTopStartRadius: 32,
             borderBottomStartRadius: 32,
           }}>
-          <Text style={{ fontSize: 20 }}>Activity</Text>
+          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Activity</Text>
+          <View style={{ marginTop: 30 }} />
           <ActivityList activity={plant.activity} />
         </View>
       </View>

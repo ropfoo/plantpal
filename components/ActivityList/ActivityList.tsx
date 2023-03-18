@@ -1,6 +1,6 @@
+import { View } from 'react-native';
 import { PlantCheck } from '../../helper/types';
-import { View, Text } from '../Themed';
-import dayjs from 'dayjs';
+import { ActivityListItem } from './ActivityListItem';
 
 interface ActivityListProps {
   activity: PlantCheck[];
@@ -9,11 +9,12 @@ interface ActivityListProps {
 export default function ActivityList({ activity }: ActivityListProps) {
   return (
     <View>
-      {activity.map((plantCheck) => (
-        <View key={plantCheck.date}>
-          <Text>date: {dayjs(plantCheck.date).format('DD MM YYYY')}</Text>
-          <Text>watered: {plantCheck.wasWatered.toString()}</Text>
-        </View>
+      {activity.map((plantCheck, index) => (
+        <ActivityListItem
+          key={plantCheck.date}
+          plantCheck={plantCheck}
+          isLast={index === activity.length - 1}
+        />
       ))}
     </View>
   );
